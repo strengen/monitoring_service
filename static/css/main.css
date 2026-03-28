@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.content {
+    text-align: center;
+}
+
+.content a {
+    display: inline-block;
+    margin: 0.5rem 0;
+    text-decoration: none;
+}
+
+
+
+.table th, .table td {
+        border: 1px solid black;
+        padding: 8px 16px;
+}
+
+.table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}

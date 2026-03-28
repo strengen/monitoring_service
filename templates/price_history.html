@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<a href="/" style="margin: 15px;"><button type="button">Home</button></a>
+<div class="content">
+    <h1 style="text-align: center;">Price history</h1>
+    <a>Enter a name of a book</a>
+    <form action="/price_history" method="post">
+        <input type="text" name="content" id="content">
+        <input type="submit" value="Submit">
+    </form>
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</div>
+{% if price_history %}
+<div class="content">
+<a>A price history of "{{ book_title }}"</a>
+</div>
+<table class="table">
+    <tr>
+        <th>Price</th>
+        <th>Defined at</th>
+    </tr>    
+    {% for price in price_history %}
+    <tr>
+        <td>{{ price.price }}$</td>
+        <td>{{ price.created_at }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}
