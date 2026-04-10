@@ -24,3 +24,31 @@ body {
     margin: 0 auto;
     border-collapse: collapse;
 }
+
+.loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 5px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-overlay span {
+    color: white;
+    font-size: 1.1rem;
+}
