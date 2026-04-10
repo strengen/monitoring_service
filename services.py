@@ -66,7 +66,7 @@ def work_state() -> None:
         time.sleep(3600)
 
 
-# Testing
+# Testing function to randomly change prices.
 # def change_price() -> None:
 #     books = [book for book in Book.select()]
 #     for book in books:
