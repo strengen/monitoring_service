@@ -62,8 +62,8 @@ def work_state() -> None:
     """ This function is for testing purposes. It simulates the work of the service, 
     updating prices in the database every hour. """
     while True:
-        update_data()
         time.sleep(3600)
+        update_data()
 
 
 # Testing function to randomly change prices.

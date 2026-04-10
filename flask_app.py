@@ -5,6 +5,7 @@ import io
 import base64
 from peewee import fn
 import statistics 
+from services import update_data
 
 
 app = Flask(__name__)
@@ -39,7 +40,7 @@ def analytics() -> str:
             buf = io.BytesIO()
             prices = [p.price for p in PriceHistory.select(PriceHistory.price).where(PriceHistory.book == book)]
             if not prices:
-                return render_template('analytics.html', error="No price history found for this book.")
+                return render_template('analytics.html', error="No price analytics found for this book.")
             min_price = min(prices)
             max_price = max(prices)
             avg_price = round(statistics.mean(prices), 2)
@@ -64,4 +65,12 @@ def analytics() -> str:
 def database() -> str:
     books = Book.select().order_by(Book.title)
     return render_template('database.html', books=books)
+
+@app.route('/update_database', methods=['POST', 'GET'])
+def update_database() -> str:
+    try:
+        update_data()
+        return render_template('database.html', books=Book.select().order_by(Book.title), message="Database updated successfully")
+    except Exception as e:
+        return render_template('database.html', books=Book.select().order_by(Book.title), error=f"An error occurred while updating the database: {e}")
 
