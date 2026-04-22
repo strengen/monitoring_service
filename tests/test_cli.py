@@ -1,5 +1,5 @@
 import sys
-from core import run_cli
+from core.cli import run_cli
 
 
 def test_cli_update(monkeypatch):

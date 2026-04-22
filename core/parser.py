@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
+from typing import Tuple, List
 import requests
 import re
-from typing import Tuple, List
 
 session = requests.Session()
 def get_items() -> Tuple[List[str], List[str]]:

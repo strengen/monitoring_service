@@ -1,6 +1,6 @@
-from core import (
+from core.database import get_book
+from core.services import (    
     add_one_element,
-    get_book,
     update_data,
     delete_element
 )

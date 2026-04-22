@@ -1,11 +1,10 @@
 from flask import Flask, render_template, request
-from database import Book, PriceHistory, get_book
+from .database import Book, PriceHistory, get_book
+from .services import update_data
 import matplotlib.pyplot as plt
 import io
 import base64
-from peewee import fn
 import statistics 
-from core import update_data
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -1,5 +1,5 @@
-from parser import get_items
-from database import Book, PriceHistory, get_book, DATE_FORMAT
+from .parser import get_items
+from .database import Book, PriceHistory, get_book, DATE_FORMAT
 from typing import List
 from datetime import datetime, time
 from peewee import fn

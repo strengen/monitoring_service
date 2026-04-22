@@ -1,6 +1,6 @@
 import argparse
 import logging
-from core import (
+from .services import (
     update_data, get_price_history, get_analytics, 
     add_one_element, work_state, delete_element, change_prices
 )

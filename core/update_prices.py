@@ -1,5 +1,5 @@
-from database import create_tables
-from core import update_data
+from .database import create_tables
+from .services import update_data
 
 # This feature is not going to work in Docker container!
 # This file is for updating prices each hour with using systemd timer.
