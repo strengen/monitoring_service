@@ -1,0 +1,20 @@
+name: Deploy features
+on:
+  push:
+    branches: 
+      - features
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: python main.py cli
+      - run: python main.py up
+      - run: python main.py hi 'rework'
+      - run: python main.py al 'rework'
+      - run: python main.py ups 'RANDOM' 34.52
+      - run: python main.py del 'random'
+      - run: python main.py runserver
+
+      
