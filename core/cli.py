@@ -1,8 +1,8 @@
 import argparse
 import logging
-from services import (
+from core import (
     update_data, get_price_history, get_analytics, 
-    add_one_element, work_state, delete_element
+    add_one_element, work_state, delete_element, change_prices
 )
 
 
@@ -40,6 +40,9 @@ def run_cli():
     parser_work_state = subparsers.add_parser('workstate', aliases=['ws'], help='Simulate the work of the service')
     parser_work_state.set_defaults(func=work_state)
 
+    # Change prices manually
+    parser_change_prices = subparsers.add_parser('change_prices', aliases=['chp'], help='Randomly changes prices')
+    parser_change_prices.set_defaults(func=change_prices)
 
     args = parser.parse_args()
     if hasattr(args, 'func'):

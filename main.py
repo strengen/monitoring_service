@@ -1,4 +1,4 @@
-from services import app, work_state, run_cli, create_tables
+from core import app, work_state, run_cli, create_tables
 import logging
 import threading
 import sys

@@ -76,13 +76,14 @@ def work_state() -> None:
         update_data()
 
 
-# Testing function to randomly change prices.
-# def change_price() -> None:
-#     books = [book for book in Book.select()]
-#     for book in books:
-#         new_price = round(random.uniform(10, 50), 2)
-#         if book.price != new_price:
-#             PriceHistory.create(book=book, price=new_price)
-#             book.price = new_price
-#             book.last_updated = datetime.now().strftime(DATE_FORMAT)
-#             book.save()
+# Testing function to randomly change prices, so some history and analytics will appear in the db, 
+# due to absence of admin changes on this website
+def change_prices() -> None:
+    books = [book for book in Book.select()]
+    for book in books:
+        new_price = round(random.uniform(10, 50), 2)
+        if book.price != new_price:
+            PriceHistory.create(book=book, price=new_price)
+            book.price = new_price
+            book.last_updated = datetime.now().strftime(DATE_FORMAT)
+            book.save()
