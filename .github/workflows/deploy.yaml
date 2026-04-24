@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+    env:
+      DB_NAME = ":memory:"
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:

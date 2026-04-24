@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 from peewee import(
     CharField, 
     FloatField,
@@ -9,7 +10,7 @@ from peewee import(
     fn
 )
 
-db = SqliteDatabase('./data/books.db')
+db = SqliteDatabase(os.getenv('DB_NAME', './data/books.db'))
 DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 class BaseModel(Model):
