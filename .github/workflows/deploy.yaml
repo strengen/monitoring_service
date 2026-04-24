@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DB_NAME = ":memory:"
+      DB_NAME: ":memory:"
     
     steps:
       - uses: actions/checkout@v3
