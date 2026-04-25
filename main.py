@@ -1,4 +1,5 @@
-from core import app, work_state, run_cli, create_tables, db
+from core import app, work_state, run_cli, create_instances, db_proxy, db
+from peewee import SqliteDatabase
 import logging
 import threading
 import sys
@@ -11,9 +12,8 @@ def main():
         logging.error('Please specify the mode either \"runserver\" or \"cli\"')
         sys.exit(1)
 
-    db.connect(reuse_if_open=True)
-    create_tables()
-
+    create_instances()
+    
     if sys.argv[1] == 'runserver':
         t = threading.Thread(target=work_state, daemon=True)
         t.start()

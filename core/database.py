@@ -32,5 +32,5 @@ def get_book(item: str) -> Book:
     except Book.DoesNotExist:
         return
     
-def create_tables():
+def create_instances():
     db.create_tables([Book, PriceHistory])

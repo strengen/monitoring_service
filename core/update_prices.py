@@ -1,4 +1,4 @@
-from .database import create_tables
+from .database import create_instances
 from .services import update_data
 
 # This feature is not going to work in Docker container!
@@ -6,5 +6,5 @@ from .services import update_data
 # To use it, you should create a systemd service and timer.
 # Run sudo systemctl enable --now <filename>.timer to enable it
 # Run sudo systemctl disable --now <filename>.timer to disable it
-create_tables()
+create_instances()
 update_data()
