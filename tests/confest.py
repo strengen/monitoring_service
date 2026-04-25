@@ -3,7 +3,7 @@ from core.database import db, Book, PriceHistory
 
 @pytest.fixture(autouse=True)
 def setup_db():
-    db.connect(reuse_if_open=True)
+    db.connect()
     db.create_tables([Book, PriceHistory])
 
     yield
