@@ -1,4 +1,4 @@
-from core import app, work_state, run_cli, create_tables
+from core import app, work_state, run_cli, create_tables, db
 import logging
 import threading
 import sys
@@ -10,7 +10,10 @@ def main():
     if len(sys.argv) < 2:
         logging.error('Please specify the mode either \"runserver\" or \"cli\"')
         sys.exit(1)
+
+    db.connect(reuse_if_open=True)
     create_tables()
+
     if sys.argv[1] == 'runserver':
         t = threading.Thread(target=work_state, daemon=True)
         t.start()

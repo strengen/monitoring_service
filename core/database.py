@@ -34,5 +34,4 @@ def get_book(item: str) -> Book:
         return
     
 def create_tables():
-    with db:
-        db.create_tables([Book, PriceHistory])
+    db.create_tables([Book, PriceHistory])
