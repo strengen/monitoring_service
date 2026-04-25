@@ -1,15 +1,44 @@
-# Book Price Monitoring Service
+# Monitoring Service
 
-A Python service that tracks book prices from [books.toscrape.com](https://books.toscrape.com), stores historical data, and provides both a CLI and a web interface for analysis.
+Backend service for tracking and analyzing price changes of books from https://books.toscrape.com.
+
+The system collects data over time, stores historical records, and allows analysis of price dynamics.
+
+---
+
+## Features
+
+- Web scraping of product data (price tracking)
+- Historical data storage in database
+- REST API for accessing collected data
+- Data analysis and visualization
+- Containerized deployment with Docker
+- Automated testing and CI pipeline (GitHub Actions)
+
+---
 
 ## Tech Stack
 
-- **Python**: core language
-- **BeautifulSoup4 + requests**: web scraping
-- **Peewee**: SQLite ORM
-- **Flask**: web interface
-- **Matplotlib**: price charts
-- **Docker**: containerization  
+- Python
+- Flask
+- SQL (SQLite / PostgreSQL)
+- Docker & Docker Compose
+- BeautifulSoup (web scraping)
+- GitHub Actions (CI/CD)
+- Pytest (testing)
+
+---
+
+## Architecture Overview
+
+The system consists of:
+
+- Scraper module — collects data from target website
+- Database layer — stores historical price data
+- API layer — provides access to stored information
+- Analysis module — processes and visualizes trends
+
+---
 
 ## Usage
 

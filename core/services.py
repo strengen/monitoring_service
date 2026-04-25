@@ -1,5 +1,5 @@
-from parser import get_items
-from database import Book, PriceHistory, get_book, DATE_FORMAT
+from .parser import get_items
+from .database import Book, PriceHistory, get_book, DATE_FORMAT
 from typing import List
 from datetime import datetime, time
 from peewee import fn
@@ -25,7 +25,7 @@ def update_data(items: List[str] | None = None,
         book.save()
     logging.info('Data saved successfully.')
     
-def update_one_element(item: str, price: float) -> None:
+def add_one_element(item: str, price: float) -> None:
     """ Save one particular element to the database """
     logger.info(f'Saving \"{item}\" to the database...')
     Book.get_or_create(title=item, defaults={'price': price})
@@ -36,7 +36,7 @@ def get_price_history(item: str) -> None:
     logger.info(f'Getting price history for \"{item}\"...')
     book = get_book(item)
     if not book:
-        raise AttributeError(f'No such book \"{item}\" in the database')
+        raise AttributeError(f'No such book in the database')
     print(book.title + ':')
     for price_h in book.history.order_by(PriceHistory.created_at):
         print(f'\t{price_h.price}$ — {price_h.created_at}')
@@ -47,7 +47,7 @@ def get_analytics(item: str) -> None:
     logger.info(f'Getting analytics for \"{item}\"...')
     book = get_book(item)
     if not book:
-        raise AttributeError(f'No such book \"{item}\" in the database')
+        raise AttributeError('No such book in the database')
     result = (PriceHistory
         .select(fn.Min(PriceHistory.price), fn.Max(PriceHistory.price), fn.Avg(PriceHistory.price))
         .where(PriceHistory.book == book).tuples().get())
@@ -58,6 +58,16 @@ def get_analytics(item: str) -> None:
     print(f'Current price of \"{book.title}\" - {book.price}$')
     logger.info(f'Analytics for \"{item}\" retrieved successfully.')
 
+def delete_element(item: str) -> None:
+    """ Delete book from the database """
+    logger.info(f'Deleting \"{item}\" from the database')
+    book = get_book(item)
+    if not book:
+        raise AttributeError('No such book in the database')
+    book.delete_instance(recursive=True)
+    logger.info(f'\"{item}\" successfully deleted from the database')
+
+
 def work_state() -> None:
     """ This function is for testing purposes. It simulates the work of the service, 
     updating prices in the database every hour. """
@@ -66,13 +76,14 @@ def work_state() -> None:
         update_data()
 
 
-# Testing function to randomly change prices.
-# def change_price() -> None:
-#     books = [book for book in Book.select()]
-#     for book in books:
-#         new_price = round(random.uniform(10, 50), 2)
-#         if book.price != new_price:
-#             PriceHistory.create(book=book, price=new_price)
-#             book.price = new_price
-#             book.last_updated = datetime.now().strftime(DATE_FORMAT)
-#             book.save()
+# Testing function to randomly change prices, so some history and analytics will appear in the db, 
+# due to absence of admin changes on this website
+def change_prices() -> None:
+    books = [book for book in Book.select()]
+    for book in books:
+        new_price = round(random.uniform(10, 50), 2)
+        if book.price != new_price:
+            PriceHistory.create(book=book, price=new_price)
+            book.price = new_price
+            book.last_updated = datetime.now().strftime(DATE_FORMAT)
+            book.save()

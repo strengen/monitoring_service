@@ -1,6 +1,10 @@
 import argparse
-from services import update_data, get_price_history, get_analytics, update_one_element, work_state
 import logging
+from .services import (
+    update_data, get_price_history, get_analytics, 
+    add_one_element, work_state, delete_element, change_prices
+)
+
 
 
 def run_cli():
@@ -12,10 +16,10 @@ def run_cli():
     parser_update.set_defaults(func=lambda: update_data())
 
     # Update one element
-    parser_single_update = subparsers.add_parser('update_single', aliases=['ups'], help='Update one particular element')
+    parser_single_update = subparsers.add_parser('add_single', aliases=['ads'], help='Add single element to the db')
     parser_single_update.add_argument('item', type=str, help='Book name')
     parser_single_update.add_argument('price', type=float, help='Price')
-    parser_single_update.set_defaults(func=update_one_element)
+    parser_single_update.set_defaults(func=add_one_element)
 
     # Price history
     parser_history = subparsers.add_parser('history', aliases=['hi'], help='Get price history of a particular book')
@@ -27,10 +31,18 @@ def run_cli():
     parser_analytics.add_argument('item', type=str, help='Book name')
     parser_analytics.set_defaults(func=get_analytics)
 
-    # Regular update
+    # Delete element
+    parser_delete = subparsers.add_parser('delete_element', aliases=['del'], help='Delete element from the db' )
+    parser_delete.add_argument('item', type=str, help='Book name')
+    parser_delete.set_defaults(func=delete_element)
+
+    # Workstate
     parser_work_state = subparsers.add_parser('workstate', aliases=['ws'], help='Simulate the work of the service')
     parser_work_state.set_defaults(func=work_state)
 
+    # Change prices manually
+    parser_change_prices = subparsers.add_parser('change_prices', aliases=['chp'], help='Randomly changes prices')
+    parser_change_prices.set_defaults(func=change_prices)
 
     args = parser.parse_args()
     if hasattr(args, 'func'):

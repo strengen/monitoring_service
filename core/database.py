@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 from peewee import(
     CharField, 
     FloatField,
@@ -9,7 +10,9 @@ from peewee import(
     fn
 )
 
+
 db = SqliteDatabase('./data/books.db')
+os.makedirs("./data", exist_ok=True)
 DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 class BaseModel(Model):
@@ -32,6 +35,5 @@ def get_book(item: str) -> Book:
     except Book.DoesNotExist:
         return
     
-def create_tables():
-    with db:
-        db.create_tables([Book, PriceHistory])
+def create_instances():
+    db.create_tables([Book, PriceHistory])
