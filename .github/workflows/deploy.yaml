@@ -21,8 +21,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r core/requirements.txt
 
-      - name: Preparing directory for db
-        run: mkdir -p data/
-
       - name: Run tests
         run: pytest
