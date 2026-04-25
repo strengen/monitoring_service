@@ -1,5 +1,4 @@
-from core import app, work_state, run_cli, create_instances, db_proxy, db
-from peewee import SqliteDatabase
+from core import app, work_state, run_cli, create_instances, db
 import logging
 import threading
 import sys
@@ -13,7 +12,7 @@ def main():
         sys.exit(1)
 
     create_instances()
-    
+
     if sys.argv[1] == 'runserver':
         t = threading.Thread(target=work_state, daemon=True)
         t.start()
