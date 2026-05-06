@@ -10,9 +10,8 @@ from peewee import(
     fn
 )
 
-
-db = SqliteDatabase('./data/books.db')
 os.makedirs("./data", exist_ok=True)
+db = SqliteDatabase('./data/books.db')
 DATE_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 class BaseModel(Model):
