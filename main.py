@@ -1,4 +1,7 @@
-from core import app, work_state, run_cli, create_instances, db
+from core.flask_app import app
+from core.database import create_instances
+from core.services import work_state
+from core.cli import run_cli
 import logging
 import threading
 import sys
